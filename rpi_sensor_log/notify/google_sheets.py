@@ -34,11 +34,13 @@ class GoogleSheetsNotifier(Notifier):
         """Notify the result to Google Sheets."""
         current_time = datetime.datetime.now().isoformat()
         if result.success:
+            base_fields = set(SensorResult.__dataclass_fields__.keys())
+            sensor_fields = set(result.__dataclass_fields__.keys())
+            measurand_fields = sorted([field for field in sensor_fields - base_fields])
             self.worksheet.insert_row(
                 values=[
                     current_time,
-                    result.temperature,
-                    result.humidity,
+                    *[getattr(result, field) for field in measurand_fields],
                     '',
                 ],
                 index=2,
