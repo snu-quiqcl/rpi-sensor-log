@@ -2,6 +2,9 @@
 scripts/
 !scripts/templates/**
 
+# Logs
+logs/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
