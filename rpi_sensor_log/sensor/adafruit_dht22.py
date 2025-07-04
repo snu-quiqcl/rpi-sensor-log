@@ -28,13 +28,13 @@ class AdafruitDHT22(Sensor):
         pin: GPIO pin.
     """
 
-    def __init__(self, name: str, pin_number: int):
+    def __init__(self, pin_number: int):
         """Extended.
         
         Args:
             pin_number: GPIO pin number.
         """
-        super().__init__(name)
+        super().__init__()
         try:
             self.pin = getattr(board, f'D{pin_number}')
         except AttributeError:
