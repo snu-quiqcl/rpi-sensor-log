@@ -6,7 +6,7 @@ from dataclasses import dataclass
 import adafruit_dht
 import board
 
-from sensor.sensor import Sensor, SensorResult
+from rpi_sensor_log.sensor.sensor import Sensor, SensorResult
 
 @dataclass
 class AdafruitDHT22Result(SensorResult):
