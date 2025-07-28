@@ -24,7 +24,6 @@ class AdafruitDHT22(Sensor):
     """Adafruit DHT22 sensor class.
     
     Attributes:
-        device: DHT22 device.
         pin: GPIO pin.
     """
 
