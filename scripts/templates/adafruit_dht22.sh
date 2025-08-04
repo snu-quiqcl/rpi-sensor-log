@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 # Move to your project path
 cd /path/to/your/project

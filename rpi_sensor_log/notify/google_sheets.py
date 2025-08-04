@@ -1,6 +1,7 @@
 """Module for logging to Google Sheets."""
 
 import datetime
+from dataclasses import fields
 
 import gspread
 from gspread.utils import ValueInputOption
@@ -33,10 +34,10 @@ class GoogleSheetsNotifier(Notifier):
     def notify(self, result: SensorResult):
         """Notify the result to Google Sheets."""
         current_time = datetime.datetime.now().isoformat()
+        base_fields = set(field.name for field in fields(SensorResult))
+        sensor_fields = set(field.name for field in fields(result))
+        measurand_fields = sorted([field for field in sensor_fields - base_fields])
         if result.success:
-            base_fields = set(SensorResult.__dataclass_fields__.keys())
-            sensor_fields = set(result.__dataclass_fields__.keys())
-            measurand_fields = sorted([field for field in sensor_fields - base_fields])
             self.worksheet.insert_row(
                 values=[
                     current_time,
@@ -50,8 +51,7 @@ class GoogleSheetsNotifier(Notifier):
             self.worksheet.insert_row(
                 values=[
                     current_time,
-                    '',
-                    '',
+                    *['' for _ in measurand_fields],
                     result.error,
                 ],
                 index=2,

@@ -1,5 +1,4 @@
-"""
-Module for monitoring through Raspberry Pi.
+"""Module for monitoring through Raspberry Pi.
 
 - Measuring from sensors.
 - Logging to Google Sheets.
